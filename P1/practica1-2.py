@@ -41,5 +41,7 @@ def main() -> None:
     else:
         print(explain_leap_year(year))
 
+    print(leap_years_between(1896, 1912))
+
 if __name__ == "__main__":
     main()
