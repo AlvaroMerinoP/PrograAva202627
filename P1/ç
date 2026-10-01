@@ -1,0 +1,59 @@
+def is_prime(n: int) -> bool:
+    """Devuelve True si n es un número primo."""
+    if n < 2:
+        return False
+
+    divisor = 2
+    while divisor * divisor <= n:
+        if n % divisor == 0:
+            return False
+        divisor += 1
+
+    return True
+
+
+def prime_list(limit: int) -> list[int]:
+    """Devuelve los números primos desde 2 hasta limit, incluido."""
+    primes = []
+
+    for number in range(2, limit + 1):
+        if is_prime(number):
+            primes.append(number)
+
+    return primes
+
+
+def check_palindrome(primes: list[int]) -> list[int]:
+    """Devuelve los primos que se leen igual en ambos sentidos."""
+    palindromes = []
+
+    for prime in primes:
+        digits = str(prime)
+        if digits == digits[::-1]:
+            palindromes.append(prime)
+
+    return palindromes
+
+
+def categorize_prime(prime: int) -> str:
+    """Clasifica un primo como pequeño, mediano o grande."""
+    if prime < 10:
+        return "pequeño"
+    if prime < 100:
+        return "mediano"
+    return "grande"
+
+
+def main() -> None:
+    print(is_prime(29))  # True
+
+    primes = prime_list(150)
+    print(primes)
+    print(check_palindrome(primes))  # [2, 3, 5, 7, 11, 101, 131]
+
+    for prime in (7, 37, 131):
+        print(prime, categorize_prime(prime))
+
+
+if __name__ == "__main__":
+    main()

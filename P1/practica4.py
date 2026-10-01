@@ -20,9 +20,32 @@ def encrypt(text: str, shift: int) -> str:
     encrypted_text = ""
 
     for char in text:
-        # Añadir shift_char(char, shift) a encrypted_text.
-        ...
-
+        encrypted_text += shift_char(char,shift)
     return encrypted_text
+
+        
+def decrypt(text:str, shift:int) -> str:
+    return encrypt(text, -shift)
+
+def brute_force(cipher_text:str) -> list[str]:
+    possibilities = []
+    for shift in range(26):
+        possibilities.append(decrypt(cipher_text, shift))
+    return possibilities
+def main() -> None:
+
+    print(shift_char("x", 3))               # a
+    print(encrypt("Hola, Mundo!", 3))       # Krod, Pxqgr!
+    print(decrypt("Krod, Pxqgr!", 3))      # Hola, Mundo!
+    print(brute_force("Krod, Pxqgr!")[3]) # Hola, Mundo!
+
+
+
+
+if __name__ == "__main__":
+    main()
+
+
+    
 
 
