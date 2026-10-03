@@ -1,4 +1,5 @@
 def normalize(text: str) -> str:
+    """Normaliza un texto eliminando tildes y caracteres no alfanuméricos."""
     text = text.lower()
 
     for original, replacement in (
@@ -16,11 +17,13 @@ def normalize(text: str) -> str:
 
 
 def is_palindrome(text: str) -> bool:
+    """Devuelve True si el texto es un palíndromo después de normalizarlo."""
     normalized = normalize(text)
     return normalized == normalized[::-1]
 
 
 def find_palindromes(sentences: list[str]) -> list[str]:
+    """Devuelve las frases de la lista que son palíndromos."""
     result = []
 
     for sentence in sentences:
@@ -31,6 +34,7 @@ def find_palindromes(sentences: list[str]) -> list[str]:
 
 
 def palindrome_words(text: str) -> list[str]:
+    """Devuelve las palabras palíndromas que tienen al menos tres letras."""
     result = []
 
     for word in text.split():
@@ -41,6 +45,7 @@ def palindrome_words(text: str) -> list[str]:
 
 
 def main() -> None:
+    """Prueba las funciones de detección de palíndromos."""
     sentences = [
         "Anita lava la tina",
         "Dábale arroz a la zorra el abad",

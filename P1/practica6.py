@@ -1,61 +1,65 @@
-def normalize(text: str) -> str:
-    text = text.lower()
+def is_prime(n: int) -> bool:
+    """Devuelve True si el número recibido es primo y False en otro caso."""
+    if n < 2:
+        return False
 
-    for original, replacement in (
-        ("á", "a"), ("é", "e"), ("í", "i"),
-        ("ó", "o"), ("ú", "u"), ("ü", "u")
-    ):
-        text = text.replace(original, replacement)
+    divisor = 2
 
-    result = ""
-    for char in text:
-        if char.isalnum():
-            result += char
+    while divisor * divisor <= n:
+        if n % divisor == 0:
+            return False
+        divisor += 1
 
-    return result
+    return True
 
 
-def is_palindrome(text: str) -> bool:
-    normalized = normalize(text)
-    return normalized == normalized[::-1]
+def prime_list(limit: int) -> list[int]:
+    """Devuelve una lista con todos los números primos hasta limit incluido."""
+    primes = []
+
+    for number in range(2, limit + 1):
+        if is_prime(number):
+            primes.append(number)
+
+    return primes
 
 
-def find_palindromes(sentences: list[str]) -> list[str]:
-    result = []
+def check_palindrome(primes: list[int]) -> list[int]:
+    """Devuelve los números de la lista que se leen igual en ambos sentidos."""
+    palindromes = []
 
-    for sentence in sentences:
-        if is_palindrome(sentence):
-            result.append(sentence)
+    for prime in primes:
+        text = str(prime)
 
-    return result
+        if text == text[::-1]:
+            palindromes.append(prime)
+
+    return palindromes
 
 
-def palindrome_words(text: str) -> list[str]:
-    result = []
-
-    for word in text.split():
-        if len(word) >= 3 and is_palindrome(word):
-            result.append(word)
-
-    return result
+def categorize_prime(prime: int) -> str:
+    """Clasifica un primo como pequeño, mediano o grande según su valor."""
+    if prime < 10:
+        return "pequeño"
+    if prime < 100:
+        return "mediano"
+    return "grande"
 
 
 def main() -> None:
-    sentences = [
-        "Anita lava la tina",
-        "Dábale arroz a la zorra el abad",
-        "Esto no es un palíndromo",
-        "¿Acaso hubo búhos acá?",
-        "Reconocer",
-    ]
+    """Prueba las funciones de análisis de números primos."""
+    limit = 150
+    primes = prime_list(limit)
 
-    print(normalize("¿Acaso hubo búhos acá?"))
-    print(is_palindrome("Anita lava la tina"))
+    print(f"Números primos hasta {limit}:")
+    print(primes)
+    print(f"Primos palíndromos: {check_palindrome(primes)}")
 
-    for phrase in find_palindromes(sentences):
-        print(phrase)
+    for prime in (7, 23, 131):
+        print(f"{prime} es un primo {categorize_prime(prime)}.")
 
-    print(palindrome_words("Ana vio un oso en el ojo de Anita"))
+    for number in (1, 2, 9, 17):
+        print(f"¿{number} es primo? {is_prime(number)}")
 
 
 if __name__ == "__main__":

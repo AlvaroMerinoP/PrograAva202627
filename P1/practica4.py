@@ -25,14 +25,17 @@ def encrypt(text: str, shift: int) -> str:
 
         
 def decrypt(text:str, shift:int) -> str:
+    """Descifra un texto reutilizando el cifrado con desplazamiento negativo."""
     return encrypt(text, -shift)
 
 def brute_force(cipher_text:str) -> list[str]:
+    """Devuelve los 26 posibles descifrados de un texto cifrado."""
     possibilities = []
     for shift in range(26):
         possibilities.append(decrypt(cipher_text, shift))
     return possibilities
 def main() -> None:
+    """Prueba las funciones del cifrado César con ejemplos del enunciado."""
 
     print(shift_char("x", 3))               # a
     print(encrypt("Hola, Mundo!", 3))       # Krod, Pxqgr!
@@ -47,5 +50,4 @@ if __name__ == "__main__":
 
 
     
-
 
