@@ -15,12 +15,18 @@ class Time:
         seconds      # Guarda los segundos (0 a 59)
         time_format  # Guarda el formato: "AM", "PM" o "24 HOURS"
     """
+    TIME_FORMATS[] = "AM", "PM", "24 HOURS"
+    time_count = 0
 
     def __init__(self):
         """
         Inicializa los atributos a 0.
         Es el único método que se le pasa parámetros como ejemplo
         """
+        self.__hours = 0
+        self.__minutes = 0
+        self.__seconds = 0
+        self.__time_format = 0
         pass
 
     def __assign_format(...):
@@ -38,6 +44,7 @@ class Time:
             True si el formato es correcto, False en caso
             contrario.
         """
+        @property
         pass
 
     def __is_24hour_format(...):
