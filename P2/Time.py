@@ -216,7 +216,7 @@ def format_time(time_value: Time) -> str:
 
 def main() -> None:
     """Ejecuta el menú y gestiona entradas incorrectas sin perder la hora."""
-    current_time = Time()
+    current_time_2 = Time()
     current_time = Time()
 
     print(current_time.get_time_count())
@@ -227,8 +227,8 @@ def main() -> None:
     hora_c = int(input("hora:"))
     minuto_c =int(input("minut:"))
     secundo_c = int(input("secundo:"))
-    current_time.set_time(hora_c, minuto_c, secundo_c, formato)
-    print(format_time(current_time))
+    current_time_2.set_time(hora_c, minuto_c, secundo_c, formato)
+    print(format_time(current_time_2))
 
 
 
