@@ -1,0 +1,30 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide empty members
+
+class MatrizFloat {
+    {static} + TIPO_DATO : type = np.float32
+    # _matriz : NDArray[np.float32] | None
+    # _nfil : int = 0
+    # _ncol : int = 0
+    + __init__() : None
+    {static} + matriz_identidad(n : int) : MatrizFloat <<classmethod>>
+    {static} + mismas_dimensiones(m1 : MatrizFloat, m2 : MatrizFloat) : bool <<staticmethod>>
+    + crear_matriz2D(nfil : int, ncol : int) : None
+    + crear_matriz1D(n_elementos : int) : None
+    + existe() : bool
+    + introducir() : None
+    + mostrar() : None
+    + sumar_matrices(otra_matriz : MatrizFloat) : MatrizFloat
+    + restar_matrices(otra_matriz : MatrizFloat) : MatrizFloat
+}
+
+note right of MatrizFloat
+  + público; # protegido.
+  Los miembros subrayados pertenecen a la clase.
+  matriz_identidad recibe cls implícitamente.
+  mismas_dimensiones no recibe self ni cls.
+  Los demás métodos reciben self.
+  Una matriz 1D tiene dimensiones 1 x n.
+end note
+@enduml

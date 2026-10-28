@@ -1,0 +1,80 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide empty members
+
+class Time {
+    - __hours : int
+    - __minutes : int
+    - __seconds : int
+    - __time_format : str
+    + __init__() : None
+    + set_time(hours : int, minutes : int, seconds : int, time_format : str) : bool
+    + get_time() : tuple
+    {static} + from_string(time_string : str) : Time | None <<classmethod>>
+}
+
+class Ficha {
+    - __nombre : str
+    - __edad : int
+    - __nacio : Time
+    + nombre : str <<property>>
+    + edad : int <<property>>
+    + nacio : Time <<property>>
+    + __init__(nombre : str = "", edad : int = 0, nacio : Time | None = None) : None
+    + visualizar() : None
+}
+
+class Empleado {
+    - __categoria : str
+    - __antiguedad : int
+    + categoria : str <<property>>
+    + antiguedad : int <<property>>
+    + __init__(nombre : str = "", edad : int = 0, nacio : Time | None = None, categoria : str = "", antiguedad : int = 0) : None
+    + visualizar() : None
+}
+
+class Cliente {
+    - __dni : str
+    + dni : str <<property>>
+    + __init__(nombre : str = "", edad : int = 0, nacio : Time | None = None, dni : str = "") : None
+    + visualizar() : None
+    + __eq__(otro : object) : bool | NotImplementedType
+}
+
+class RegistroDiario {
+    - __personas : List<Ficha>
+    + personas : List<Ficha> <<property, readOnly>>
+    + __init__() : None
+    + agregar_persona(persona : Ficha) : None
+    + visualizar_registro() : None
+    + visualizar_empleados() : None
+    {static} + es_empleado(persona : object) : bool <<staticmethod>>
+    + __getitem__(indice : int) : Ficha
+    + __len__() : int
+    + __add__(otro : object) : RegistroDiario | NotImplementedType
+}
+
+Ficha <|-- Empleado
+Ficha <|-- Cliente
+Ficha "0..*" --> "1" Time : nacio
+RegistroDiario "0..*" o-- "0..*" Ficha : personas
+
+note left of Time
+  Clase reutilizada de la practica 2.
+  Se muestran sus miembros relevantes para P4.
+end note
+
+note right of Ficha
+  - privado; + publico.
+  Las propiedades tienen getter y setter.
+  nacio=None crea una nueva hora 12:00:00 AM.
+  visualizar se redefine en las clases derivadas.
+end note
+
+note right of RegistroDiario
+  Solo agrega Empleado o Cliente.
+  personas devuelve una copia de la lista.
+  + crea otro registro, sin modificar los operandos.
+  Los registros pueden compartir personas.
+end note
+@enduml
