@@ -1,0 +1,11 @@
+
+def codigos_unicos(datos):
+    if not datos:
+        return False
+
+    return codigos = datos.split().strip().upper()
+
+datos = [" r1 ", "R2", "r1", " ", "sw1 ", "r2"]
+print(codigos_unicos(datos))
+print(repr(datos[0]))
+print(codigos_unicos([]))
